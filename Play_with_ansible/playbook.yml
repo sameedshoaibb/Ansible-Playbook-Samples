@@ -1,0 +1,32 @@
+---
+
+# To download any yum dependency
+
+- name: Dependancies_To_Perform_SpeedTest
+  yum:
+    name:
+      - python
+      - wget
+  tags: three
+
+# To download file from a specified link 
+
+- name: SPEED_TEST_PROCESS_2
+  get_url:
+    url: http://www.speedtest.net/speedtest-servers.php
+    dest: /root/
+    mode: 0777
+  tags:
+   - five
+
+# Line_in_file is used to replace a single line/word
+
+- name: DISABLE_SELINUX
+  lineinfile:
+    path: /etc/selinux/config
+    regexp: "{{ item.regexp}}"
+    line: "{{ item.line }}"
+  with_items:
+    - { regexp: '^enforcing', line: 'disabled' }
+    - { regexp: '^permissive', line: 'disabled' }
+
