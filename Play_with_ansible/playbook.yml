@@ -30,3 +30,29 @@
     - { regexp: '^enforcing', line: 'disabled' }
     - { regexp: '^permissive', line: 'disabled' }
 
+# To restart a service
+
+- name: restart sshd service
+  service:
+    name: sshd
+    state: restarted
+
+# To update the machine to it's latest version
+
+- name: Update the machine
+  yum: name=* state=latest
+
+# To install development tools
+
+- name: install the 'Development tools' package group
+  yum:
+    name: "@Development tools"
+    state: present
+
+# To install RPM package manager
+
+- name: RPM install and build files
+  yum:
+    name: http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm
+    state: present
+
